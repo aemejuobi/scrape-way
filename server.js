@@ -2,12 +2,13 @@
 require("dotenv").config();
 const express = require("express");
 const exhb = require("express-handlebars");
-const port = process.env.PORT || 8080;
-const app = express();
+const logger = require("morgan");
 const mongoose = require("mongoose");
 const apiRoutes = require("./routes/apiRoutes");
 const htmlRoutes = require("./routes/htmlRoutes");
-const logger = require("morgan");
+const port = process.env.PORT || 8080;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const app = express();
 
 // Middleware
 app.use(logger("dev"));
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to mongo DB
-mongoose.connect("mongodb://localhost:27017/scraperDB", {useNewUrlParser: true});
+mongoose.connect(MONGODB_URI);
 
 // Handlebars
 app.engine("handlebars", exhb({defaultLayout: "main"}));
