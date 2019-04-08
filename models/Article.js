@@ -2,14 +2,25 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // const ObjectId = Schema.ObjectId;
 
-// Create connection
-// mongoose.createConnection("mongodb://localhost:27017/scraperDB", {useNewUrlParser: true});
-
 // Create a schema
 const ArticleSchema = new Schema({
     // _id: ObjectId,
-    title: String,
-    link: String
+    title: {
+        type: String,
+        required: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
+    comment: {
+        type: Schema.Types.ObjectId,
+        ref: "Comments"
+    }
 });
 
 const Article = mongoose.model("Article", ArticleSchema);

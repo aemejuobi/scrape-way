@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to mongo DB
-mongoose.createConnection("mongodb://localhost:27017/scraperDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/scraperDB", {useNewUrlParser: true});
 
 // Handlebars
 app.engine("handlebars", exhb({defaultLayout: "main"}));
@@ -26,6 +26,6 @@ apiRoutes(app);
 htmlRoutes(app);
 
 // Start server
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
